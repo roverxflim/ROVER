@@ -1,1 +1,533 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ڕۆڤێر فلم - Rover Film</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background: #05070a; color: #f8fafc; min-height: 100vh; overflow-x: hidden; position: relative; }
+
+        #authSection { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            padding: 20px; 
+            background: radial-gradient(circle at center, #0c1322 0%, #05070a 100%);
+            position: relative;
+            overflow: hidden; 
+        }
+
+        .auth-flying-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .flying-item {
+            position: absolute;
+            pointer-events: none;
+            animation: cleanMotion 12s infinite ease-in-out;
+            filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.7));
+            will-change: transform, opacity;
+        }
+
+        .blue-heart { color: #38bdf8; }
+        .blue-butterfly { color: #0ea5e9; }
+        .blue-glasses { color: #38bdf8; }
+        .blue-dove { color: #7dd3fc; }
+        .popcorn-item { font-size: 26px; }
+
+        @keyframes cleanMotion {
+            0% { transform: scale(0.6) translateY(0); opacity: 0; }
+            20% { opacity: 0.9; }
+            50% { transform: scale(1.15) translateY(-60px) rotate(180deg); opacity: 1; }
+            80% { opacity: 0.9; }
+            100% { transform: scale(0.6) translateY(0) rotate(360deg); opacity: 0; }
+        }
+
+        .auth-container { 
+            width: 100%; 
+            max-width: 440px; 
+            background: rgba(11, 18, 32, 0.85); 
+            backdrop-filter: blur(25px); 
+            border: 1px solid rgba(56, 189, 248, 0.3); 
+            border-radius: 28px; 
+            padding: 40px; 
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.1); 
+            position: relative; 
+            z-index: 10; 
+        }
+        
+        .auth-logo-box { text-align: center; margin-bottom: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .auth-logo-text { font-size: 24px; font-weight: 900; color: #38bdf8; letter-spacing: 0.5px; text-shadow: 0 0 20px rgba(56,189,248,0.4); }
+        .auth-subtitle { text-align: center; font-size: 13px; color: #94a3b8; margin-bottom: 28px; }
+
+        .auth-tabs { display: flex; background: rgba(7, 11, 20, 0.95); padding: 5px; border-radius: 14px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.05); }
+        .auth-tab { flex: 1; padding: 11px; background: transparent; border: none; color: #94a3b8; font-size: 13px; font-weight: 700; border-radius: 10px; cursor: pointer; text-align: center; transition: all 0.3s ease; }
+        .auth-tab.active { background: linear-gradient(135deg, #38bdf8, #0284c7); color: #05070a; box-shadow: 0 4px 20px rgba(56, 189, 248, 0.4); }
+
+        .auth-form-view { display: none; animation: fadeIn 0.4s ease; }
+        .auth-form-view.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 12px; color: #cbd5e1; margin-bottom: 5px; font-weight: 600; }
+        .input-wrapper { position: relative; display: flex; align-items: center; }
+        .input-wrapper i { position: absolute; right: 16px; color: #38bdf8; font-size: 15px; }
+        .auth-input { width: 100%; padding: 11px 48px 11px 16px; background: rgba(5, 7, 10, 0.85); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 14px; color: #fff; font-size: 13px; outline: none; transition: all 0.3s; }
+        .auth-input:focus { border-color: #38bdf8; box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15); background: rgba(5, 7, 10, 0.98); }
+
+        .file-upload-input { width: 100%; padding: 10px; background: rgba(5, 7, 10, 0.85); border: 1px dashed rgba(56, 189, 248, 0.4); border-radius: 14px; color: #94a3b8; font-size: 12px; cursor: pointer; outline: none; }
+        .file-upload-input::-webkit-file-upload-button { background: rgba(56, 189, 248, 0.15); border: none; padding: 6px 12px; border-radius: 8px; color: #38bdf8; font-weight: 700; cursor: pointer; margin-left: 10px; }
+
+        .submit-btn { width: 100%; padding: 12px; background: linear-gradient(135deg, #38bdf8, #0284c7); color: #05070a; border: none; border-radius: 14px; font-size: 14px; font-weight: 800; cursor: pointer; transition: all 0.3s; margin-top: 5px; box-shadow: 0 4px 20px rgba(56, 189, 248, 0.3); }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(56, 189, 248, 0.5); }
+
+        #dashboardSection { display: none; position: relative; z-index: 10; }
+        header { background: rgba(5, 7, 10, 0.9); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(56, 189, 248, 0.1); position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 18px 40px; }
+        .logo { font-size: 20px; font-weight: 900; color: #38bdf8; display: flex; align-items: center; gap: 10px; }
+        .nav-links { display: flex; gap: 14px; list-style: none; align-items: center; }
+        .nav-links a { color: #94a3b8; text-decoration: none; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 6px; }
+        .nav-links a:hover, .nav-links a.active { color: #38bdf8; }
+        
+        .admin-controls { display: none; gap: 10px; align-items: center; }
+        .admin-add-btn { background: linear-gradient(135deg, #10b981, #059669); border: none; padding: 8px 14px; border-radius: 20px; color: #fff; font-weight: 700; align-items: center; gap: 6px; cursor: pointer; font-size: 12px; display: flex; }
+        .admin-banner-btn { background: linear-gradient(135deg, #f59e0b, #d97706); border: none; padding: 8px 14px; border-radius: 20px; color: #fff; font-weight: 700; align-items: center; gap: 6px; cursor: pointer; font-size: 12px; display: flex; }
+
+        .profile-btn-nav { background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); padding: 7px 14px; border-radius: 20px; color: #38bdf8; font-weight: 700; display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 12px; }
+        .logout-btn-nav { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); padding: 7px 12px; border-radius: 20px; color: #f87171; font-weight: 700; cursor: pointer; font-size: 12px; }
+
+        .hero-banner { width: 100%; height: 320px; background-color: #0c1322; background-size: cover; background-position: center; border-bottom: 1px solid rgba(56, 189, 248, 0.15); display: flex; align-items: flex-end; padding: 30px; position: relative; }
+        .hero-banner::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, #05070a, transparent); pointer-events: none; }
+        .hero-title-box { position: relative; z-index: 2; font-size: 24px; font-weight: 900; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+
+        .container { max-width: 1350px; margin: 30px auto; padding: 0 30px 50px 30px; }
+        .section-title { font-size: 20px; font-weight: 800; display: flex; align-items: center; gap: 12px; color: #f8fafc; border-right: 4px solid #38bdf8; padding-right: 12px; margin-bottom: 25px; }
+        
+        .movies-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 25px; }
+        .movie-card { background: rgba(11, 18, 32, 0.7); border-radius: 16px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; cursor: pointer; position: relative; }
+        .movie-card:hover { transform: translateY(-8px); border-color: rgba(56, 189, 248, 0.5); box-shadow: 0 10px 30px rgba(56,189,248,0.15); }
+        .movie-poster { height: 280px; background: #0c1322; position: relative; display: flex; align-items: center; justify-content: center; color: #475569; font-size: 45px; background-size: cover; background-position: center; }
+        .movie-badge { position: absolute; top: 12px; left: 12px; background: rgba(5, 7, 10, 0.85); padding: 5px 10px; border-radius: 10px; font-size: 11px; font-weight: 800; color: #facc15; border: 1px solid rgba(250, 204, 21, 0.3); }
+        .private-badge { position: absolute; top: 12px; right: 12px; background: rgba(239, 68, 68, 0.85); padding: 5px 8px; border-radius: 10px; font-size: 11px; font-weight: 800; color: #fff; border: 1px solid rgba(239, 68, 68, 0.5); display: none; }
+        .movie-card.is-private .private-badge { display: block; }
+        
+        .movie-info { padding: 16px; }
+        .movie-title { font-size: 14px; font-weight: 800; margin-bottom: 8px; color: #f8fafc; }
+        .movie-details { display: flex; justify-content: space-between; font-size: 12px; color: #94a3b8; }
+        .sub-tag { color: #38bdf8; font-weight: 700; background: rgba(56, 189, 248, 0.1); padding: 2px 8px; border-radius: 6px; }
+
+        .empty-msg { grid-column: 1 / -1; text-align: center; padding: 40px; color: #64748b; font-size: 14px; background: rgba(11, 18, 32, 0.4); border-radius: 16px; border: 1px dashed rgba(255,255,255,0.05); }
+
+        .app-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 7, 10, 0.85); backdrop-filter: blur(8px); z-index: 2000; justify-content: center; align-items: center; }
+        .app-modal-content { background: #0c1322; border: 1px solid rgba(56, 189, 248, 0.3); width: 100%; max-width: 440px; border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 15px; box-shadow: 0 25px 50px rgba(0,0,0,0.8); max-height: 90vh; overflow-y: auto; }
+        
+        .player-modal-content { background: #0c1322; border: 1px solid rgba(56, 189, 248, 0.3); width: 100%; max-width: 800px; border-radius: 22px; padding: 20px; display: flex; flex-direction: column; gap: 15px; box-shadow: 0 25px 50px rgba(0,0,0,0.8); }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 10px; }
+        .close-modal { cursor: pointer; color: #94a3b8; font-size: 18px; }
+        
+        video { width: 100%; max-height: 450px; border-radius: 12px; background: #000; outline: none; }
+    </style>
+</head>
+<body>
+
+    <div id="authSection">
+        <div class="auth-flying-bg">
+            <i class="fa-solid fa-dove flying-item blue-dove" style="top: 15%; left: 10%; font-size: 26px; animation-duration: 11s; animation-delay: 0s;"></i>
+            <div class="flying-item popcorn-item" style="top: 28%; left: 14%; animation-duration: 13s; animation-delay: 1.2s;">🍿</div>
+            <i class="fa-solid fa-heart flying-item blue-heart" style="top: 45%; left: 7%; font-size: 24px; animation-duration: 12s; animation-delay: 2.1s;"></i>
+            <i class="fa-solid fa-hippo flying-item blue-butterfly" style="top: 65%; left: 12%; font-size: 27px; animation-duration: 14s; animation-delay: 0.6s;"></i>
+            <i class="fa-solid fa-glasses flying-item blue-glasses" style="top: 80%; left: 9%; font-size: 25px; animation-duration: 11.5s; animation-delay: 1.7s;"></i>
+            <div class="flying-item popcorn-item" style="top: 88%; left: 16%; animation-duration: 12.5s; animation-delay: 2.8s;">🍿</div>
+
+            <i class="fa-solid fa-heart flying-item blue-heart" style="top: 18%; right: 11%; font-size: 27px; animation-duration: 12s; animation-delay: 0.9s;"></i>
+            <div class="flying-item popcorn-item" style="top: 32%; right: 14%; animation-duration: 13.5s; animation-delay: 1.9s;">🍿</div>
+            <i class="fa-solid fa-dove flying-item blue-dove" style="top: 50%; right: 9%; font-size: 28px; animation-duration: 11s; animation-delay: 2.4s;"></i>
+            <i class="fa-solid fa-glasses flying-item blue-glasses" style="top: 68%; right: 12%; font-size: 24px; animation-duration: 12.8s; animation-delay: 0.4s;"></i>
+            <i class="fa-solid fa-hippo flying-item blue-butterfly" style="top: 82%; right: 10%; font-size: 29px; animation-duration: 14.5s; animation-delay: 1.3s;"></i>
+            <div class="flying-item popcorn-item" style="top: 86%; right: 17%; animation-duration: 12.2s; animation-delay: 2.9s;">🍿</div>
+
+            <i class="fa-solid fa-dove flying-item blue-dove" style="top: 6%; left: 35%; font-size: 22px; animation-duration: 13s; animation-delay: 0.5s;"></i>
+            <div class="flying-item popcorn-item" style="top: 8%; left: 55%; animation-duration: 11.8s; animation-delay: 1.6s;">🍿</div>
+            <i class="fa-solid fa-heart flying-item blue-heart" style="bottom: 8%; left: 40%; font-size: 23px; animation-duration: 12.4s; animation-delay: 2.2s;"></i>
+            <i class="fa-solid fa-glasses flying-item blue-glasses" style="bottom: 6%; left: 60%; font-size: 24px; animation-duration: 13.7s; animation-delay: 0.9s;"></i>
+        </div>
+
+        <div class="auth-container">
+            <div class="auth-logo-box">
+                <div class="auth-logo-text"><i class="fa-solid fa-film" style="color:#38bdf8;"></i> ڕۆڤێر فلم</div>
+            </div>
+            <div class="auth-subtitle">سەکۆی تایبەتی فیلم و زنجیرە ژێرنووسکراوەکان</div>
+
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="switchAuthTab('login', event)"><i class="fa-solid fa-right-to-bracket"></i> چوونەژوورەوە</button>
+                <button class="auth-tab" onclick="switchAuthTab('register', event)"><i class="fa-solid fa-user-plus"></i> دروستکردنی هەژمار</button>
+            </div>
+
+            <div id="loginView" class="auth-form-view active">
+                <div class="form-group">
+                    <label>ناوی بەکارهێنەر:</label>
+                    <div class="input-wrapper"><i class="fa-solid fa-user"></i><input type="text" class="auth-input" id="loginUser" placeholder="ناوی بەکارهێنەر"></div>
+                </div>
+                <div class="form-group">
+                    <label>وشەی تێپەڕ:</label>
+                    <div class="input-wrapper"><i class="fa-solid fa-lock"></i><input type="password" class="auth-input" id="loginPass" placeholder="••••••••"></div>
+                </div>
+                <button class="submit-btn" onclick="handleLogin()">چوونەژوورەوە بۆ سەکۆ</button>
+            </div>
+
+            <div id="registerView" class="auth-form-view">
+                <div class="form-group">
+                    <label>ناوی بەکارهێنەری نوێ:</label>
+                    <div class="input-wrapper"><i class="fa-solid fa-user-plus"></i><input type="text" class="auth-input" id="regName" placeholder="ناوی بەکارهێنەر هەڵبژێرە"></div>
+                </div>
+                <div class="form-group">
+                    <label>ئیمەیڵ:</label>
+                    <div class="input-wrapper"><i class="fa-solid fa-envelope"></i><input type="text" class="auth-input" id="regEmail" placeholder="name@example.com"></div>
+                </div>
+                <div class="form-group">
+                    <label>وشەی تێپەڕ:</label>
+                    <div class="input-wrapper"><i class="fa-solid fa-key"></i><input type="password" class="auth-input" id="regPass" placeholder="••••••••"></div>
+                </div>
+                <button class="submit-btn" onclick="handleRegister()">دروستکردنی هەژمار و دەستپێکردن</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="dashboardSection">
+        <header>
+            <div class="logo"><i class="fa-solid fa-film"></i> ڕۆڤێر فلم</div>
+            <ul class="nav-links">
+                <li><a class="active"><i class="fa-solid fa-house"></i> سەرەکی</a></li>
+                <li><a><i class="fa-solid fa-video"></i> فیلمەکان</a></li>
+                <li>
+                    <div class="admin-controls" id="adminControls">
+                        <button class="admin-add-btn" onclick="openAddMovieModal()"><i class="fa-solid fa-plus"></i> زیادکردنی فیلم</button>
+                        <button class="admin-banner-btn" onclick="openBannerModal()"><i class="fa-solid fa-image"></i> گۆڕینی بانەر</button>
+                    </div>
+                </li>
+                <li><div class="profile-btn-nav"><i class="fa-solid fa-user-gear"></i> <span id="navDisplayUserName">پڕۆفایل</span></div></li>
+                <li><button class="logout-btn-nav" onclick="handleLogout()"><i class="fa-solid fa-power-off"></i></button></li>
+            </ul>
+        </header>
+
+        <!-- بەشی بانەر لەسەرەوە -->
+        <div class="hero-banner" id="heroBanner">
+            <div class="hero-title-box"><i class="fa-solid fa-film" style="color:#38bdf8;"></i> نوێترین فیلمەکان</div>
+        </div>
+
+        <div class="container">
+            <div class="section-title"><i class="fa-solid fa-fire" style="color: #38bdf8;"></i> دواین فیلمە ژێرنووسکراوەکان</div>
+            <div class="movies-grid" id="moviesContainer"></div>
+        </div>
+    </div>
+
+    <!-- پەنجەرەی زیادکردنی فیلم -->
+    <div class="app-modal" id="addMovieModal">
+        <div class="app-modal-content">
+            <div class="modal-header">
+                <h3 style="color:#38bdf8; font-size:16px;"><i class="fa-solid fa-film"></i> زیادکردنی فیلمی نوێ</h3>
+                <i class="fa-solid fa-xmark close-modal" onclick="closeAddMovieModal()"></i>
+            </div>
+            <div class="form-group"><label>ناوی فیلم:</label><input type="text" class="auth-input" id="newMovieTitle" placeholder="ناوی فیلم"></div>
+            <div class="form-group"><label>ساڵی دەرچوون:</label><input type="text" class="auth-input" id="newMovieYear" placeholder="2026"></div>
+            <div class="form-group"><label>هەڵسەنگاندن:</label><input type="text" class="auth-input" id="newMovieRating" placeholder="8.5"></div>
+            <div class="form-group"><label>هەڵبژاردنی وێنەی پۆستەر:</label><input type="file" class="file-upload-input" id="newMoviePosterFile" accept="image/*"></div>
+            <div class="form-group"><label>هەڵبژاردنی فایلی ڤیدۆ:</label><input type="file" class="file-upload-input" id="newMovieVideoFile" accept="video/*"></div>
+            <button class="submit-btn" onclick="addNewMovie()">زیادکردن</button>
+        </div>
+    </div>
+
+    <!-- پەنجەرەی گۆڕینی بانەر -->
+    <div class="app-modal" id="bannerModal">
+        <div class="app-modal-content">
+            <div class="modal-header">
+                <h3 style="color:#f59e0b; font-size:16px;"><i class="fa-solid fa-image"></i> گۆڕینی وێنەی بانەر</h3>
+                <i class="fa-solid fa-xmark close-modal" onclick="closeBannerModal()"></i>
+            </div>
+            <div class="form-group"><label>هەڵبژاردنی وێنەی نوێ بۆ بانەر:</label><input type="file" class="file-upload-input" id="newBannerFile" accept="image/*"></div>
+            <button class="submit-btn" style="background: linear-gradient(135deg, #f59e0b, #d97706); color:#fff;" onclick="updateBannerImage()">گۆڕین و پاشەکەوتکردن</button>
+        </div>
+    </div>
+
+    <!-- پەنجەرەی لێدانی ڤیدۆ (Player) -->
+    <div class="app-modal" id="playerModal">
+        <div class="player-modal-content">
+            <div class="modal-header">
+                <h3 id="playerModalTitle" style="color:#38bdf8; font-size:16px;"><i class="fa-solid fa-play"></i> سەیرکردنی فیلم</h3>
+                <i class="fa-solid fa-xmark close-modal" onclick="closePlayerModal()"></i>
+            </div>
+            <video id="movieVideoPlayer" controls>
+                پۆرتەرەکەی وێبگەڕەکەت پشتگیری ڤیدۆ ناکات.
+            </video>
+        </div>
+    </div>
+
+    <script>
+        if (!localStorage.getItem('roverFirstCleanDone')) {
+            localStorage.removeItem('roverMoviesList');
+            localStorage.setItem('roverFirstCleanDone', 'true');
+        }
+
+        function switchAuthTab(tab, e) {
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.auth-form-view').forEach(v => v.classList.remove('active'));
+            e.currentTarget.classList.add('active');
+            document.getElementById(tab === 'login' ? 'loginView' : 'registerView').classList.add('active');
+        }
+
+        function handleLogin() {
+            let u = document.getElementById('loginUser').value.trim();
+            let p = document.getElementById('loginPass').value.trim();
+            if(!u) { alert("تکایە ناوی بەکارهێنەر بنووسە!"); return; }
+            if(u.toUpperCase() === 'ROVER' && p !== '999919') {
+                alert("وشەی تێپەڕی بەڕێوەبەر هەڵەیە!");
+                return;
+            }
+            loginSession(u);
+        }
+
+        function handleRegister() {
+            let n = document.getElementById('regName').value.trim();
+            if(!n) { alert("تکایە ناوی بەکارهێنەر بنووسە!"); return; }
+            if(n.toUpperCase() === 'ROVER') {
+                alert("ئەم ناوی بەکارهێنەرە تایبەتە و ناتوانیت تۆماری بکەیت!");
+                return;
+            }
+            loginSession(n);
+        }
+
+        function loginSession(u) {
+            localStorage.setItem('roverMoviesUser', u);
+            setupDash(u);
+        }
+
+        function setupDash(u) {
+            document.getElementById('authSection').style.display = 'none';
+            document.getElementById('dashboardSection').style.display = 'block';
+            document.getElementById('navDisplayUserName').innerText = u;
+            
+            let adminControls = document.getElementById('adminControls');
+            if(u.toUpperCase() === 'ROVER') {
+                adminControls.style.display = 'flex';
+            } else {
+                adminControls.style.display = 'none';
+            }
+            loadBanner();
+            loadMovies();
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('roverMoviesUser');
+            document.getElementById('dashboardSection').style.display = 'none';
+            document.getElementById('authSection').style.display = 'flex';
+        }
+
+        function loadBanner() {
+            let savedBanner = localStorage.getItem('roverBannerImage');
+            let bannerEl = document.getElementById('heroBanner');
+            if(savedBanner) {
+                bannerEl.style.backgroundImage = `url('${savedBanner}')`;
+            } else {
+                bannerEl.style.backgroundImage = `url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1400&q=80')`;
+            }
+        }
+
+        function openBannerModal() {
+            let currentUser = localStorage.getItem('roverMoviesUser');
+            if(!currentUser || currentUser.toUpperCase() !== 'ROVER') return;
+            document.getElementById('bannerModal').style.display = 'flex';
+        }
+
+        function closeBannerModal() {
+            document.getElementById('bannerModal').style.display = 'none';
+        }
+
+        function updateBannerImage() {
+            let currentUser = localStorage.getItem('roverMoviesUser');
+            if(!currentUser || currentUser.toUpperCase() !== 'ROVER') return;
+
+            let fileInput = document.getElementById('newBannerFile').files[0];
+            if(!fileInput) { alert("تکایە وێنەیەک هەڵبژێرە!"); return; }
+
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                let base64Image = e.target.result;
+                localStorage.setItem('roverBannerImage', base64Image);
+                loadBanner();
+                document.getElementById('newBannerFile').value = '';
+                closeBannerModal();
+                alert("بانەرەکە بە سەرکەوتوویی گۆڕدرا!");
+            };
+            reader.readAsDataURL(fileInput);
+        }
+
+        function loadMovies() {
+            let m = JSON.parse(localStorage.getItem('roverMoviesList')) || [];
+            let c = document.getElementById('moviesContainer');
+            c.innerHTML = '';
+            
+            let currentUser = localStorage.getItem('roverMoviesUser');
+            let isAdmin = currentUser && currentUser.toUpperCase() === 'ROVER';
+
+            let filteredMovies = m.map((movie, originalIndex) => ({ movie, originalIndex })).filter(item => {
+                if(item.movie.isPrivate && !isAdmin) return false;
+                return true;
+            });
+
+            if(filteredMovies.length === 0) {
+                c.innerHTML = `<div class="empty-msg"><i class="fa-solid fa-film" style="font-size: 24px; margin-bottom: 8px; display: block;"></i> هیچ فیلمێک بوونی نییە. تکایە فیلمی نوێ زیاد بکە.</div>`;
+                return;
+            }
+
+            filteredMovies.forEach(item => {
+                let movie = item.movie;
+                let origIndex = item.originalIndex;
+                let privateClass = movie.isPrivate ? 'is-private' : '';
+
+                let card = document.createElement('div');
+                card.className = `movie-card ${privateClass}`;
+                
+                let posterStyle = movie.poster ? `background-image: url('${movie.poster}');` : '';
+                let posterContent = movie.poster ? '' : `<i class="fa-solid fa-video"></i>`;
+
+                card.innerHTML = `
+                    <div class="movie-poster" style="${posterStyle}">
+                        ${posterContent}
+                        <div class="movie-badge">${movie.rating}</div>
+                        <div class="private-badge"><i class="fa-solid fa-lock"></i> پرایڤت</div>
+                    </div>
+                    <div class="movie-info">
+                        <div class="movie-title">${movie.title}</div>
+                        <div class="movie-details"><span>${movie.year}</span><span class="sub-tag">کوردی</span></div>
+                    </div>`;
+
+                let clickCount = 0;
+                let clickTimer = null;
+
+                card.addEventListener('click', () => {
+                    clickCount++;
+                    clearTimeout(clickTimer);
+
+                    clickTimer = setTimeout(() => {
+                        if (isAdmin && clickCount === 3) {
+                            if(confirm(`دڵنیایت لە سڕینەوەی فیلمی "${movie.title}"؟`)) {
+                                m.splice(origIndex, 1);
+                                localStorage.setItem('roverMoviesList', JSON.stringify(m));
+                                loadMovies();
+                            }
+                        } else if (isAdmin && clickCount >= 4) {
+                            movie.isPrivate = !movie.isPrivate;
+                            m[origIndex] = movie;
+                            localStorage.setItem('roverMoviesList', JSON.stringify(m));
+                            alert(movie.isPrivate ? "فیلمەکە کرا بە پرایڤت" : "فیلمەکە گەڕێنرایەوە گشتی");
+                            loadMovies();
+                        } else if (clickCount === 1) {
+                            openPlayerModal(movie);
+                        }
+                        clickCount = 0;
+                    }, 400);
+                });
+
+                c.appendChild(card);
+            });
+        }
+
+        function openPlayerModal(movie) {
+            document.getElementById('playerModalTitle').innerText = movie.title;
+            let videoPlayer = document.getElementById('movieVideoPlayer');
+            videoPlayer.src = movie.video || '';
+            document.getElementById('playerModal').style.display = 'flex';
+            videoPlayer.play();
+        }
+
+        function closePlayerModal() {
+            let videoPlayer = document.getElementById('movieVideoPlayer');
+            videoPlayer.pause();
+            videoPlayer.src = '';
+            document.getElementById('playerModal').style.display = 'none';
+        }
+
+        function openAddMovieModal() { 
+            let currentUser = localStorage.getItem('roverMoviesUser');
+            if(!currentUser || currentUser.toUpperCase() !== 'ROVER') return; 
+            document.getElementById('addMovieModal').style.display = 'flex'; 
+        }
+
+        function closeAddMovieModal() { document.getElementById('addMovieModal').style.display = 'none'; }
+
+        function addNewMovie() {
+            let currentUser = localStorage.getItem('roverMoviesUser');
+            if(!currentUser || currentUser.toUpperCase() !== 'ROVER') {
+                alert("تەنها بەڕێوەبەر دەسەڵاتی زیادکردنی فیلمی هەیە!");
+                return;
+            }
+
+            let title = document.getElementById('newMovieTitle').value.trim();
+            if(!title) { alert("تکایە ناوی فیلم بنووسە!"); return; }
+            
+            let year = document.getElementById('newMovieYear').value.trim() || '2026';
+            let rating = document.getElementById('newMovieRating').value.trim() || '8.0';
+            
+            let posterFile = document.getElementById('newMoviePosterFile').files[0];
+            let videoFile = document.getElementById('newMovieVideoFile').files[0];
+
+            let readerPoster = new FileReader();
+            let readerVideo = new FileReader();
+
+            readerPoster.onload = function(uploadPosterEvent) {
+                let posterBase64 = uploadPosterEvent.target.result;
+
+                if (videoFile) {
+                    readerVideo.onload = function(uploadVideoEvent) {
+                        let videoBase64 = uploadVideoEvent.target.result;
+                        saveMovieData(title, year, rating, posterBase64, videoBase64);
+                    };
+                    readerVideo.readAsDataURL(videoFile);
+                } else {
+                    saveMovieData(title, year, rating, posterBase64, '');
+                }
+            };
+
+            if (posterFile) {
+                readerPoster.readAsDataURL(posterFile);
+            } else {
+                saveMovieData(title, year, rating, '', videoFile ? '' : '');
+            }
+        }
+
+        function saveMovieData(title, year, rating, poster, video) {
+            let m = JSON.parse(localStorage.getItem('roverMoviesList')) || [];
+            m.unshift({ 
+                title: title, 
+                year: year, 
+                rating: rating,
+                poster: poster,
+                video: video,
+                isPrivate: false
+            });
+            localStorage.setItem('roverMoviesList', JSON.stringify(m));
+            
+            document.getElementById('newMovieTitle').value = '';
+            document.getElementById('newMovieYear').value = '';
+            document.getElementById('newMovieRating').value = '';
+            document.getElementById('newMoviePosterFile').value = '';
+            document.getElementById('newMovieVideoFile').value = '';
+
+            loadMovies();
+            closeAddMovieModal();
+        }
+
+        window.onload = () => { let u = localStorage.getItem('roverMoviesUser'); if(u) setupDash(u); };
+    </script>
+</body>
+</html>
 
