@@ -1,4 +1,30 @@
 <!DOCTYPE html>
+<html lang="ckb">
+<head>
+    <meta charset="UTF-8">
+    <title>وێبسایتەکەم</title>
+</head>
+<body>
+
+    <!-- ناوەڕۆکی وێبسایتەکەت لێرە دەبێت -->
+     <h1>بەخێر بێن بۆ وێبسایتەکە</h1>
+
+    <!-- کۆدی پشکنینی ئەژمار لێرە لە خوارەوە دادەنێیت -->
+    <script>
+        // پشکنینی ئەوەی کە ئایا بەکارهێنەر چۆتە ژوورەوە یان نا
+        const isLoggedIn = localStorage.getItem('user_logged_in'); 
+
+        // ئەگەر نەچووبێتە ژوورەوە، دەیگوازێتەوە بۆ پەڕەی لۆگین
+        if (!isLoggedIn && window.location.pathname !== '/login.html' && window.location.pathname !== '/register.html') {
+            window.location.href = '/login.html';
+        }
+    </script>
+</body>
+</html>
+
+////
+
+<!DOCTYPE html>
 <html lang="ku" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -535,26 +561,3 @@
 کۆدی نوێ
 ////
 
-<!DOCTYPE html>
-<html lang="ckb">
-<head>
-    <meta charset="UTF-8">
-    <title>وێبسایتەکەم</title>
-</head>
-<body>
-
-    <!-- ناوەڕۆکی وێبسایتەکەت لێرە دەبێت -->
-     <h1>بەخێر بێن بۆ وێبسایتەکە</h1>
-
-    <!-- کۆدی پشکنینی ئەژمار لێرە لە خوارەوە دادەنێیت -->
-    <script>
-        // پشکنینی ئەوەی کە ئایا بەکارهێنەر چۆتە ژوورەوە یان نا
-        const isLoggedIn = localStorage.getItem('user_logged_in'); 
-
-        // ئەگەر نەچووبێتە ژوورەوە، دەیگوازێتەوە بۆ پەڕەی لۆگین
-        if (!isLoggedIn && window.location.pathname !== '/login.html' && window.location.pathname !== '/register.html') {
-            window.location.href = '/login.html';
-        }
-    </script>
-</body>
-</html>
