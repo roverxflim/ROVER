@@ -17,10 +17,16 @@
         .auth-flying-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: hidden; }
         .flying-item { position: absolute; pointer-events: none; animation: cleanMotion 12s infinite ease-in-out; filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.7)); }
         .blue-heart { color: #38bdf8; }
-        .blue-butterfly { color: #0ea5e9; }
-        .blue-glasses { color: #38bdf8; }
-        .blue-dove { color: #7dd3fc; }
-        .popcorn-item { font-size: 26px; }
+        
+        /* ئەنیمەیشنی دڵ و پۆپۆڕن لە کاتی ڕفرێش و چوونەژوورەوە */
+        .refresh-effect-item { position: fixed; z-index: 9999; animation: refreshPopup 2s forwards ease-out; pointer-events: none; filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.8)); }
+
+        @keyframes refreshPopup {
+            0% { transform: scale(0.3) translateY(0); opacity: 0; }
+            20% { transform: scale(1.4) translateY(-20px); opacity: 1; }
+            80% { transform: scale(1) translateY(-100px); opacity: 0.9; }
+            100% { transform: scale(1.6) translateY(-160px); opacity: 0; }
+        }
 
         @keyframes cleanMotion {
             0% { transform: scale(0.6) translateY(0); opacity: 0; }
@@ -73,6 +79,7 @@
         .admin-users-btn { background: linear-gradient(135deg, #8b5cf6, #7c3aed); border: none; padding: 6px 10px; border-radius: 20px; color: #fff; font-weight: 700; cursor: pointer; font-size: 11px; display: flex; gap: 5px; align-items: center; }
         .admin-watching-btn { background: linear-gradient(135deg, #06b6d4, #0891b2); border: none; padding: 6px 10px; border-radius: 20px; color: #fff; font-weight: 700; cursor: pointer; font-size: 11px; display: flex; gap: 5px; align-items: center; }
 
+        .report-btn-nav { background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); padding: 5px 10px; border-radius: 20px; color: #f87171; font-weight: 700; display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 11px; }
         .profile-btn-nav { background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); padding: 5px 10px; border-radius: 20px; color: #38bdf8; font-weight: 700; display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 11px; }
         .logout-btn-nav { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); padding: 5px 8px; border-radius: 20px; color: #f87171; font-weight: 700; cursor: pointer; font-size: 11px; }
 
@@ -83,8 +90,14 @@
         .hero-title-box { position: relative; z-index: 2; font-size: 22px; font-weight: 900; color: #fff; }
 
         .container { max-width: 1350px; margin: 25px auto; padding: 0 25px; }
-        .section-title { font-size: 18px; font-weight: 800; display: flex; align-items: center; gap: 10px; color: #f8fafc; border-right: 4px solid #38bdf8; padding-right: 10px; margin-bottom: 20px; }
+        .section-header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px; }
+        .section-title { font-size: 18px; font-weight: 800; display: flex; align-items: center; gap: 10px; color: #f8fafc; border-right: 4px solid #38bdf8; padding-right: 10px; }
         
+        .search-box-wrapper { position: relative; width: 300px; }
+        .search-box-wrapper i { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: #38bdf8; font-size: 14px; }
+        .search-input { width: 100%; padding: 10px 40px 10px 14px; background: rgba(11, 18, 32, 0.85); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 20px; color: #fff; font-size: 13px; outline: none; }
+        .search-input:focus { border-color: #38bdf8; box-shadow: 0 0 10px rgba(56, 189, 248, 0.2); }
+
         .movies-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
         .movie-card { background: rgba(11, 18, 32, 0.7); border-radius: 16px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease; cursor: pointer; position: relative; }
         .movie-card:hover { transform: translateY(-6px); border-color: rgba(56, 189, 248, 0.5); }
@@ -115,6 +128,12 @@
         
         .profile-avatar-preview { width: 80px; height: 80px; border-radius: 50%; background: #1e293b; margin: 0 auto; background-size: cover; background-position: center; border: 2px solid #38bdf8; display: flex; align-items: center; justify-content: center; font-size: 28px; color: #64748b; }
         .admin-user-avatar { width: 32px; height: 32px; border-radius: 50%; background-size: cover; background-position: center; border: 1px solid #38bdf8; display: inline-block; vertical-align: middle; margin-left: 6px; background-color: #1e293b; text-align: center; line-height: 32px; font-size: 12px; color: #fff; }
+
+        .report-tabs { display: flex; gap: 8px; margin-bottom: 10px; }
+        .report-tab { flex: 1; padding: 8px; background: rgba(5,7,10,0.8); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 10px; color: #94a3b8; font-size: 12px; font-weight: 700; cursor: pointer; text-align: center; }
+        .report-tab.active { background: rgba(239, 68, 68, 0.2); color: #f87171; border-color: #ef4444; }
+        .report-view { display: none; }
+        .report-view.active { display: block; }
     </style>
 </head>
 <body>
@@ -154,16 +173,15 @@
 
             <div id="registerView" class="auth-form-view">
                 <div class="form-group">
-                    <label>وێنەی پڕۆفایل (ئیجباری - هەموو کوالیتییەک):</label>
-                    <input type="file" class="file-upload-input" id="regAvatarFile" accept="image/*">
-                </div>
-                <div class="form-group">
                     <label>ناوی بەکارهێنەری نوێ (تەنها ئینگلیزی):</label>
                     <div class="input-wrapper"><i class="fa-solid fa-user-plus"></i><input type="text" class="auth-input" id="regName" placeholder="English Username"></div>
                 </div>
                 <div class="form-group">
-                    <label>شار (Location):</label>
-                    <div class="input-wrapper"><i class="fa-solid fa-location-dot"></i><input type="text" class="auth-input" id="regCity" placeholder="City"></div>
+                    <label>لۆکەیشنی خۆکار (GPS Location):</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <input type="text" class="auth-input" id="regCity" placeholder="خۆکار دەدۆزرێتەوە..." readonly style="background: rgba(5,7,10,0.95); cursor: not-allowed; color: #38bdf8; font-weight: 700;">
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>ئیمەیڵ (GameMail / ناچارە):</label>
@@ -173,6 +191,7 @@
                     <label>وشەی تێپەڕ (کەمتر نەبێت لە 6 پیت/ژمارە):</label>
                     <div class="input-wrapper"><i class="fa-solid fa-key"></i><input type="password" class="auth-input" id="regPass" placeholder="••••••••"></div>
                 </div>
+                <div class="upload-loading" id="regLoadingText"><i class="fa-solid fa-spinner fa-spin"></i> هەژمارەکەت دروست دەکرێت، تکایە 5 چرکە چاوەڕوان بە...</div>
                 <button class="submit-btn" id="regSubmitBtn" onclick="handleRegister()">تۆمارکردن و دروستکردنی هەژمار</button>
             </div>
         </div>
@@ -188,9 +207,10 @@
                         <button class="admin-add-btn" onclick="openAddMovieModal()"><i class="fa-solid fa-plus"></i> فیلم</button>
                         <button class="admin-banner-btn" onclick="openBannerModal()"><i class="fa-solid fa-image"></i> بانەر</button>
                         <button class="admin-users-btn" id="adminUsersBtn" onclick="openUsersModal()"><i class="fa-solid fa-users-gear"></i> ئەکاونتەکان</button>
-                        <button class="admin-watching-btn" id="adminWatchingBtn" onclick="openWatchingModal()"><i class="fa-solid fa-tv"></i> چاودێری فیلمەکان</button>
+                        <button class="admin-watching-btn" id="adminWatchingBtn" onclick="openWatchingModal()"><i class="fa-solid fa-tv"></i> چاودێری</button>
                     </div>
                 </li>
+                <li><div class="report-btn-nav" onclick="openReportModal()"><i class="fa-solid fa-triangle-exclamation"></i> ڕیپۆرت</div></li>
                 <li><div class="profile-btn-nav" onclick="openProfileModal()"><i class="fa-solid fa-user-gear"></i> <span id="navDisplayUserName">پڕۆفایل</span></div></li>
                 <li><button class="logout-btn-nav" onclick="handleLogout()"><i class="fa-solid fa-power-off"></i></button></li>
             </ul>
@@ -201,12 +221,44 @@
         </div>
 
         <div class="container">
-            <div class="section-title"><i class="fa-solid fa-fire" style="color: #38bdf8;"></i> دواین فیلمە ژێرنووسکراوەکان</div>
+            <div class="section-header-flex">
+                <div class="section-title"><i class="fa-solid fa-fire" style="color: #38bdf8;"></i> دواین فیلمە ژێرنووسکراوەکان</div>
+                <div class="search-box-wrapper">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" class="search-input" id="movieSearchInput" placeholder="گەڕان بەدوای فیلم..." oninput="filterMovies()">
+                </div>
+            </div>
             <div class="movies-grid" id="moviesContainer"></div>
         </div>
     </div>
 
-    <!-- پەنجەرەی دەستکاریکردنی پڕۆفایلی بەکارهێنەر -->
+    <!-- پەنجەرەی ڕیپۆرت -->
+    <div class="app-modal" id="reportModal">
+        <div class="app-modal-content">
+            <div class="modal-header">
+                <h3 style="color:#f87171; font-size:15px;"><i class="fa-solid fa-triangle-exclamation"></i> سیستەمی ڕیپۆرت و کێشەکان</h3>
+                <i class="fa-solid fa-xmark close-modal" onclick="closeReportModal()"></i>
+            </div>
+            <div class="report-tabs">
+                <button class="report-tab active" onclick="switchReportTab('server', event)">ڕەخنە لە سێرڤەر</button>
+                <button class="report-tab" onclick="switchReportTab('movie', event)">فیلم کار ناکات</button>
+            </div>
+            
+            <div id="serverReportView" class="report-view active">
+                <div class="form-group"><label>کێشە یان ڕەخنت لە چی سێرڤەرێک یان بەشێک هەیە؟</label>
+                <textarea class="auth-input" id="serverReportText" rows="4" placeholder="کێشەکەی سێرڤەر بنووسە..." style="resize:none; padding:12px;"></textarea></div>
+                <button class="submit-btn" style="background: linear-gradient(135deg, #ef4444, #dc2626); color:#fff;" onclick="submitServerReport()">ناردنی ڕەخنە</button>
+            </div>
+
+            <div id="movieReportView" class="report-view">
+                <div class="form-group"><label>ناوی ئەو فیلمەی کار ناکات:</label><input type="text" class="auth-input" id="brokenMovieTitle" placeholder="ناوی فیلمەکە بنووسە"></div>
+                <div class="form-group"><label>هۆکاری کێشەکە (بۆ نموونە: ڤیدۆکە لێنادات):</label><input type="text" class="auth-input" id="brokenMovieReason" placeholder="ڕوونکردنەوەی کورت"></div>
+                <button class="submit-btn" style="background: linear-gradient(135deg, #ef4444, #dc2626); color:#fff;" onclick="submitMovieReport()">ناردنی ڕیپۆرتی فیلم</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- پەنجەرەی پڕۆفایل -->
     <div class="app-modal" id="profileModal">
         <div class="app-modal-content">
             <div class="modal-header">
@@ -215,7 +267,7 @@
             </div>
             <div class="profile-avatar-preview" id="profileAvatarPreview"><i class="fa-solid fa-user"></i></div>
             <div class="form-group"><label>وێنەی پڕۆفایل:</label><input type="file" class="file-upload-input" id="profileAvatarFile" accept="image/*"></div>
-            <div class="form-group"><label>شارەکەت:</label><input type="text" class="auth-input" id="profileCityInput"></div>
+            <div class="form-group"><label>شارەکەت (لۆکەیشنی GPS):</label><input type="text" class="auth-input" id="profileCityInput" readonly style="color:#38bdf8; font-weight:700;"></div>
             <div class="form-group"><label>ئیمەیڵ (GameMail):</label><input type="text" class="auth-input" id="profileEmailInput"></div>
             <div class="form-group"><label>وشەی تێپەڕی نوێ:</label><input type="password" class="auth-input" id="profilePassInput" placeholder="••••••••"></div>
             <button class="submit-btn" onclick="saveProfileChanges()">پاشەکەوتکردنی گۆڕانکارییەکان</button>
@@ -232,7 +284,7 @@
             <div class="form-group"><label>ناوی فیلم / ڤیدۆ:</label><input type="text" class="auth-input" id="newMovieTitle" placeholder="ناوی فیلم"></div>
             <div class="form-group"><label>ساڵ:</label><input type="text" class="auth-input" id="newMovieYear" placeholder="2026"></div>
             <div class="form-group"><label>هەڵسەنگاندن:</label><input type="text" class="auth-input" id="newMovieRating" placeholder="8.5"></div>
-            <div class="form-group"><label>پۆستەر (هەموو کوالیتییەک یان گیف GIF):</label><input type="file" class="file-upload-input" id="newMoviePosterFile" accept="image/*"></div>
+            <div class="form-group"><label>پۆستەر:</label><input type="file" class="file-upload-input" id="newMoviePosterFile" accept="image/*"></div>
             <div class="form-group"><label>فایلی ڤیدۆ یان گیف (GIF):</label><input type="file" class="file-upload-input" id="newMovieVideoFile" accept="video/*,image/gif"></div>
             <div class="upload-loading" id="uploadLoadingText"><i class="fa-solid fa-spinner fa-spin"></i> بار دەکرێت، تکایە کەمێک چاوەڕوان بە...</div>
             <button class="submit-btn" id="saveMovieSubmitBtn" onclick="addNewMovie()">زیادکردن</button>
@@ -295,11 +347,35 @@
             localStorage.setItem('roverAllUsersList', JSON.stringify(users));
         }
 
+        function fetchUserLocation(inputElementId) {
+            let inputEl = document.getElementById(inputElementId);
+            if (!inputEl) return;
+            inputEl.value = "لۆکەیشن دەدۆزرێتەوە...";
+            
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    let lat = position.coords.latitude;
+                    let lon = position.coords.longitude;
+                    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&accept-language=en`)
+                        .then(res => res.json())
+                        .then(data => {
+                            let city = data.address.city || data.address.town || data.address.state || data.address.country || "Erbil";
+                            inputEl.value = city;
+                        })
+                        .catch(() => { inputEl.value = "Erbil"; });
+                }, () => { inputEl.value = "Erbil"; }, { timeout: 10000 });
+            } else {
+                inputEl.value = "Erbil";
+            }
+        }
+
         function switchAuthTab(tab, e) {
             document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.auth-form-view').forEach(v => v.classList.remove('active'));
             e.currentTarget.classList.add('active');
             document.getElementById(tab === 'login' ? 'loginView' : 'registerView').classList.add('active');
+            
+            if(tab === 'register') { fetchUserLocation('regCity'); }
         }
 
         function handleLogin() {
@@ -316,12 +392,10 @@
 
         function handleRegister() {
             let n = document.getElementById('regName').value.trim();
-            let c = document.getElementById('regCity').value.trim() || 'Unknown';
+            let c = document.getElementById('regCity').value.trim() || 'Erbil';
             let e = document.getElementById('regEmail').value.trim();
             let p = document.getElementById('regPass').value.trim();
-            let avatarFile = document.getElementById('regAvatarFile').files[0];
 
-            if(!avatarFile) { alert("دانانی وێنەی پڕۆفایل ئیجبارییە!"); return; }
             if(!n) { alert("تکایە ناوی بەکارهێنەر بنووسە!"); return; }
 
             let englishRegex = /^[A-Za-z0-9_]+$/;
@@ -335,30 +409,58 @@
             let users = getUsersList();
             if(users.some(x => x.username.toUpperCase() === upperN)) { alert("ئەم ناوە پێشتر تۆمار کراوە!"); return; }
 
+            let loadingText = document.getElementById('regLoadingText');
             let submitBtn = document.getElementById('regSubmitBtn');
-            submitBtn.innerText = "چاوەڕوان بە...";
+            loadingText.style.display = 'block';
             submitBtn.disabled = true;
 
-            let reader = new FileReader();
-            reader.onload = function(ev) {
-                users.push({ username: n, pass: p, isAdmin: false, city: c, trueCity: c, email: e, avatar: ev.target.result, currentMovie: '' });
+            setTimeout(() => {
+                users.push({ 
+                    username: n, 
+                    pass: p, 
+                    isAdmin: false, 
+                    city: c, 
+                    trueCity: c, 
+                    email: e, 
+                    avatar: '', 
+                    currentMovie: '' 
+                });
                 saveUsersList(users);
+                loadingText.style.display = 'none';
+                submitBtn.disabled = false;
+                
                 alert("هەژمارەکەت بە سەرکەوتوویی دروستکرا!");
+                
                 document.getElementById('regName').value = '';
-                document.getElementById('regCity').value = '';
                 document.getElementById('regEmail').value = '';
                 document.getElementById('regPass').value = '';
-                document.getElementById('regAvatarFile').value = '';
-                submitBtn.innerText = "تۆمارکردن و دروستکردنی هەژمار";
-                submitBtn.disabled = false;
                 document.querySelectorAll('.auth-tab')[0].click();
-            };
-            reader.readAsDataURL(avatarFile);
+            }, 5000);
         }
 
         function loginSession(u) {
             localStorage.setItem('roverMoviesUser', u);
+            triggerRefreshHeartsAndPopcorn();
             setupDash(u);
+        }
+
+        // ئەنیمەیشنی دڵی سوور و پۆپۆڕنی ناو قاپ لە کاتی ڕفرێش یان چوونەژوورەوە بۆ ماوەی ٢ چرکە
+        function triggerRefreshHeartsAndPopcorn() {
+            let icons = [
+                '<i class="fa-solid fa-heart" style="color: #ef4444; font-size: 32px;"></i>',
+                '<span style="font-size: 32px;">🍿</span>'
+            ];
+            
+            for(let i = 0; i < 18; i++) {
+                let item = document.createElement('div');
+                item.className = 'refresh-effect-item';
+                item.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+                item.style.left = Math.random() * window.innerWidth + 'px';
+                item.style.top = (window.innerHeight - 80) + 'px';
+                item.style.animationDuration = (1.5 + Math.random() * 0.5) + 's';
+                document.body.appendChild(item);
+                setTimeout(() => { item.remove(); }, 2000); // ٢ چرکە دواتر لابچێت
+            }
         }
 
         function setupDash(u) {
@@ -390,13 +492,41 @@
             document.getElementById('authSection').style.display = 'flex';
         }
 
+        function openReportModal() { document.getElementById('reportModal').style.display = 'flex'; }
+        function closeReportModal() { document.getElementById('reportModal').style.display = 'none'; }
+
+        function switchReportTab(type, e) {
+            document.querySelectorAll('.report-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.report-view').forEach(v => v.classList.remove('active'));
+            e.currentTarget.classList.add('active');
+            document.getElementById(type === 'server' ? 'serverReportView' : 'movieReportView').classList.add('active');
+        }
+
+        function submitServerReport() {
+            let txt = document.getElementById('serverReportText').value.trim();
+            if(!txt) { alert("تکایە ڕەخنە یان کێشەکەی سێرڤەر بنووسە!"); return; }
+            alert("ڕەخنەی سێرڤەر بە سەرکەوتوویی نێردرا بۆ ئادمین. سوپاس!");
+            document.getElementById('serverReportText').value = '';
+            closeReportModal();
+        }
+
+        function submitMovieReport() {
+            let movieName = document.getElementById('brokenMovieTitle').value.trim();
+            let reason = document.getElementById('brokenMovieReason').value.trim();
+            if(!movieName) { alert("تکایە ناوی فیلمە ڕیپۆرتکراوەکە بنووسە!"); return; }
+            alert(`ڕیپۆرتی فیلمی "${movieName}" نێردرا. سوپاس بۆ هاوکاریت!`);
+            document.getElementById('brokenMovieTitle').value = '';
+            document.getElementById('brokenMovieReason').value = '';
+            closeReportModal();
+        }
+
         function openProfileModal() {
             let currentUser = localStorage.getItem('roverMoviesUser');
             let users = getUsersList();
             let obj = users.find(x => x.username.toUpperCase() === currentUser.toUpperCase());
             if(!obj) return;
 
-            document.getElementById('profileCityInput').value = obj.city || '';
+            document.getElementById('profileCityInput').value = obj.city || 'Erbil';
             document.getElementById('profileEmailInput').value = obj.email || '';
             document.getElementById('profilePassInput').value = '';
             
@@ -419,12 +549,10 @@
             let idx = users.findIndex(x => x.username.toUpperCase() === currentUser.toUpperCase());
             if(idx === -1) return;
 
-            let newCity = document.getElementById('profileCityInput').value.trim();
             let newEmail = document.getElementById('profileEmailInput').value.trim();
             let newPass = document.getElementById('profilePassInput').value.trim();
             let avatarFile = document.getElementById('profileAvatarFile').files[0];
 
-            if(newCity) { users[idx].city = newCity; users[idx].trueCity = newCity; }
             if(newEmail) { users[idx].email = newEmail; }
             if(newPass) {
                 if(newPass.length < 6) { alert("پاسۆرد دەبێت کەمتر نەبێت لە 6 پیت!"); return; }
@@ -436,7 +564,7 @@
                 reader.onload = function(e) {
                     users[idx].avatar = e.target.result;
                     saveUsersList(users);
-                    alert("گۆڕانکارییەکان پاشەکەوت کران!");
+                    alert("گۆڕانکارییەکان پاشەکەوت کرան!");
                     closeProfileModal();
                     setupDash(currentUser);
                 };
@@ -486,20 +614,19 @@
             users.forEach((usr, idx) => {
                 let row = document.createElement('div');
                 row.className = 'user-row';
-                let statusText = usr.isAdmin ? '<span style="color:#34d399;">ئادمین</span>' : '<span style="color:#94a3b8;">بەکارهێنەر</span>';
                 let btnText = usr.isAdmin ? 'لابردنی ئادمین' : 'پێدانی ئادمین';
                 let btnClass = usr.isAdmin ? 'toggle-admin-btn is-admin' : 'toggle-admin-btn';
                 let actionBtnHTML = usr.username.toUpperCase() === 'ROVER' ? '<span style="color:#f59e0b;">سەرەکی</span>' : `<button class="${btnClass}" onclick="toggleUserAdmin(${idx})">${btnText}</button>`;
                 let watchingText = usr.currentMovie ? `<div style="color:#38bdf8; margin-top:2px;"><i class="fa-solid fa-play"></i> سەیری دەکات: ${usr.currentMovie}</div>` : `<div style="color:#64748b; margin-top:2px;">هیچ سەیر ناکات</div>`;
                 let passwordDisplayHTML = isSuperAdmin ? `پاسۆرد: <b style="color:#facc15;">${usr.pass}</b> | ` : '';
                 let avatarHTML = usr.avatar ? `<div class="admin-user-avatar" style="background-image: url('${usr.avatar}');"></div>` : `<div class="admin-user-avatar"><i class="fa-solid fa-user"></i></div>`;
-                let displayLocation = usr.trueCity || usr.city || 'نادیار';
+                let displayLocation = usr.trueCity || usr.city || 'Erbil';
 
                 row.innerHTML = `
                     <div style="display: flex; align-items: center; gap: 8px; width: 100%;">
                         ${avatarHTML}
                         <div style="flex: 1;">
-                            <strong style="font-size:13px;"><span class="online-dot"></span> ${usr.username}</strong> <span style="color:#94a3b8;">(${displayLocation})</span>
+                            <strong style="font-size:13px;"><span class="online-dot"></span> ${usr.username}</strong> <span style="color:#38bdf8;">(${displayLocation})</span>
                             <div style="font-size:11px; margin-top:2px; color:#cbd5e1;">${passwordDisplayHTML}ئیمەیڵ: ${usr.email || 'نییە'}</div>
                             ${watchingText}
                         </div>
@@ -553,7 +680,7 @@
             }
         }
 
-        function loadMovies() {
+        function loadMovies(searchTerm = '') {
             let m = JSON.parse(localStorage.getItem('roverMoviesList')) || [];
             let c = document.getElementById('moviesContainer');
             c.innerHTML = '';
@@ -565,11 +692,12 @@
 
             let filtered = m.map((movie, originalIndex) => ({ movie, originalIndex })).filter(item => {
                 if(item.movie.isPrivate && !isAdmin) return false;
+                if(searchTerm && !item.movie.title.toLowerCase().includes(searchTerm.toLowerCase())) return false;
                 return true;
             });
 
             if(filtered.length === 0) {
-                c.innerHTML = `<div class="empty-msg"><i class="fa-solid fa-film" style="font-size: 22px; margin-bottom: 6px; display: block;"></i> هیچ فیلمێک بوونی نییە.</div>`;
+                c.innerHTML = `<div class="empty-msg"><i class="fa-solid fa-film" style="font-size: 22px; margin-bottom: 6px; display: block;"></i> هیچ فیلمێک نەدۆزرایەوە.</div>`;
                 return;
             }
 
@@ -600,14 +728,14 @@
                             if(confirm(`دڵنیایت لە سڕینەوەی "${movie.title}"؟`)) {
                                 m.splice(origIndex, 1);
                                 localStorage.setItem('roverMoviesList', JSON.stringify(m));
-                                loadMovies();
+                                loadMovies(document.getElementById('movieSearchInput').value);
                             }
                         } else if (isAdmin && clickCount >= 4) {
                             movie.isPrivate = !movie.isPrivate;
                             m[origIndex] = movie;
                             localStorage.setItem('roverMoviesList', JSON.stringify(m));
                             alert(movie.isPrivate ? "فیلمەکە کرا بە پرایڤت" : "فیلمەکە گەڕێنرایەوە گشتی");
-                            loadMovies();
+                            loadMovies(document.getElementById('movieSearchInput').value);
                         } else if (clickCount === 1) {
                             openPlayerModal(movie);
                         }
@@ -616,6 +744,11 @@
                 });
                 c.appendChild(card);
             });
+        }
+
+        function filterMovies() {
+            let val = document.getElementById('movieSearchInput').value.trim();
+            loadMovies(val);
         }
 
         function openPlayerModal(movie) {
@@ -705,7 +838,14 @@
             alert("فیلم یان ڤیدۆکە بە سەرکەوتوویی زیادکرا!");
         }
 
-        window.onload = () => { let u = localStorage.getItem('roverMoviesUser'); if(u) setupDash(u); };
+        window.onload = () => { 
+            fetchUserLocation('regCity');
+            let u = localStorage.getItem('roverMoviesUser'); 
+            if(u) {
+                triggerRefreshHeartsAndPopcorn(); // بانگکردنی ئەنیمەیشنی دل و پۆپۆڕن لە کاتی ڕفرێشدا
+                setupDash(u); 
+            }
+        };
     </script>
 </body>
 </html>
